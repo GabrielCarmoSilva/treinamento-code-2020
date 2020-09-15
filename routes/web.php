@@ -19,6 +19,17 @@ Route::middleware('auth')->group(function(){
         return view('admin.layouts.app');
         
     })->name('dashboard');
+    
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::resource('/users','UserController');
+
+    //Usuarios
+    Route::resource('/users','UserController')->names('users');
+
+    //Categorias
+    Route::resource('/categories', 'CategoryController')->names('categories');
+
+    //Cursos
+    Route::resource('/courses', 'CourseController')->names('courses');
+    Route::post('/courses/register/{course}', 'CourseController@register')->name('courses.register');
+    Route::get('/mycourses', 'CourseController@userCourses')->name('courses.mycourses');
 });

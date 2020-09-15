@@ -10,7 +10,7 @@
 				<img src="https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
 			</div>
 			<div class="info">
-				<a href="#" class="d-block">Usuário</a>
+				<a href="#" class="d-block">{{ Auth::user()->name }}</a>
 			</div>
 			<div class="info align-self-center">
 				<form id="logout-form" method="post" action="{{ route('logout') }}">
@@ -21,14 +21,6 @@
 		</div>
 		<nav class="mt-2">
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-				<li class="nav-item has-treeview ">
-					<a href="/" class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}">
-						<i class="nav-icon fas fa-tachometer-alt"></i>
-						<p>
-							Dashboard
-						</p>
-					</a>
-				</li>
 				@can('viewAny', App\User::class)
 					<li class="nav-item has-treeview ">
 						<a href="{{ route('users.index') }}"
@@ -40,6 +32,38 @@
 						</a>
 					</li>
 				@endcan
+				<li class="nav-item has-treeview ">
+					<a href="{{ route('categories.index') }}"
+						class="nav-link {{ Route::is('categories.index') ? 'active' : '' }}">
+						<i class="nav-icon fas fa-folder-open"></i>
+						<p>
+							Categorias
+						</p>
+					</a>	
+				</li>
+				<li class="nav-item has-treeview ">
+					<a href="#"
+						class="nav-link">
+						<i class="nav-icon fas fa-school"></i>
+						<p>
+							Cursos
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('courses.index') }}" class="nav-link {{ Route::is('courses.index') ? 'active' : '' }}">
+								<i class="nav-icon fas fa-university"></i>
+								<p>Todos os cursos</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('courses.mycourses') }}" class="nav-link {{ Route::is('courses.mycourses') ? 'active' : '' }}">
+								<i class="nav-icon fas fa-graduation-cap"></i>
+								<p>Meus cursos</p>
+							</a>
+						</li>
+                	</ul>	
+				</li>
 			</ul>
 		</nav>
 	</div>
