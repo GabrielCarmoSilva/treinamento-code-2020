@@ -24,9 +24,9 @@ class UpdateCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255|string',
+            'name' => 'required|max:255|string|unique:courses,name,' . $this->course->id,
             'description' => 'required|string',
-            'slug' => 'required|string',
+            'slug' => 'required|string|unique:courses,slug,' . $this->course->id,
             'image_link' => 'nullable|file|max:512',
             'video' => 'required|string',
             'category_id' => 'required|exists:categories,id',
